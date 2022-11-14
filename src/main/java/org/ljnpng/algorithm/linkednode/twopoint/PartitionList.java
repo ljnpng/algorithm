@@ -16,11 +16,10 @@ public class PartitionList {
                 p2.next = p;
                 p2 = p2.next;
             }
-            // 需要断开主链的头节点
-            ListNode tmp = p.next;
-            p.next = null;
-            p = tmp;
+            p = p.next;
         }
+        //当前节点复用的是原链表的节点，而其 next 指针可能指向一个小于 x 的节点
+        p2.next = null;
 
         // 链接两个链表
         p1.next = list2.next;
