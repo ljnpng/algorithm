@@ -30,6 +30,20 @@ public class Utils {
         return dummyNode.next;
     }
 
+    public static String listNodeToString(ListNode node) {
+        String str = "[";
+        while (node != null && node.next != null) {
+            str += node.val + ",";
+            node = node.next;
+        }
+
+        if (node != null) {
+            str += node.val;
+        }
+        str += "]";
+        return str;
+    }
+
     public static void prettyPrintLinkedList(ListNode node) {
         while (node != null && node.next != null) {
             System.out.println(node.val + "->");
