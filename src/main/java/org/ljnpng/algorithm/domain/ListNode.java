@@ -1,8 +1,10 @@
 package org.ljnpng.algorithm.domain;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
+@Data
 public class ListNode {
     public int val;
     public ListNode next;
