@@ -12,24 +12,17 @@ public class N0025ReverseKGroup {
      */
     public ListNode reverseKGroup(ListNode head, int k ) {
         if (k <= 1) return head;
-        ListNode dummy = new ListNode(-1);
-        dummy.next = head;
+        ListNode dummy = new ListNode(-1, head), pre = dummy;
 
-        ListNode pre = dummy;
         while (pre.next != null) {
             ListNode inx = pre;
-            boolean canReverse = true;
             for (int i = 0; i < k; i++) {
                 if (inx.next == null) {
-                    canReverse = false;
-                    break;
+                    return dummy.next;
                 }
                 inx = inx.next;
             }
 
-            if (!canReverse) {
-                break;
-            }
 
             ListNode cur = pre.next, next = cur.next;
             for (int i = 0; i < k - 1; i++) {
@@ -66,6 +59,7 @@ public class N0025ReverseKGroup {
 
                 next = cur.next;
             }
+            // 最后不足的部分 重新反转
             if (!canReverse) {
                 cur = pre.next;
                 next = cur.next;
