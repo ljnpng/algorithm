@@ -5,6 +5,7 @@ package org.ljnpng.algorithm.array;
  *
  * 相似题目，删除排序链表中的重复元素
  * @see org.ljnpng.algorithm.linkednode.twopoint.N0083DeleteDuplicates
+ * @see N0027RemoveElement
  */
 public class N0026RemoveDuplicates {
 

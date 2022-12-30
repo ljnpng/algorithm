@@ -7,6 +7,7 @@ import org.ljnpng.algorithm.domain.ListNode;
  * 相似题目，删除有序数组中的重复项
  *
  * @see org.ljnpng.algorithm.array.N0026RemoveDuplicates
+ * @see org.ljnpng.algorithm.array.N0027RemoveElement
  */
 public class N0083DeleteDuplicates {
 
