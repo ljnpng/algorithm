@@ -7,11 +7,17 @@ public class N0005LongestPalindrome {
      * @return 最大子回文串
      */
     public String longestPalindrome(String s) {
-        String longest = s.substring(0, 1);
-        for (int i = 0; i < s.length() - 1; i++) {
-            longest = longestStr(longest, palindrome(s, i, i), palindrome(s, i, i + 1));
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = palindrome(s, i, i);
+            int len2 = palindrome(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
         }
-        return longest;
+        return s.substring(start, end + 1);
     }
 
     /**
@@ -19,20 +25,15 @@ public class N0005LongestPalindrome {
      * @param s 字符串
      * @param left 左下标 left <= right
      * @param right 右下标
-     * @return 找到的回文串
+     * @return 回文串长度
      */
-    private String palindrome(String s, int left, int right) {
+    private int palindrome(String s, int left, int right) {
         while (left >= 0 && right < s.length()
                 && s.charAt(left) == s.charAt(right)) {
             left--;
             right++;
         }
-        return s.substring(left + 1, right);
-    }
-
-    private String longestStr(String s1, String s2, String s3) {
-        String temp = s1.length() >= s2.length() ? s1 : s2;
-        return temp.length() >= s3.length() ? temp : s3;
+        return right - left - 1;
     }
 
 }
