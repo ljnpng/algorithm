@@ -169,13 +169,14 @@ def create_issue(url, token):
     }
     repos = "https://api.github.com/repos/ljnpng/algorithm/issues"
     response = requests.post(url=repos, headers=headers, data=data)
+    # todo 输出issue 的url
     print(response.status_code)
 
 if __name__ == '__main__':
     if(len(sys.argv) <= 1):
-        print("Please input leetcode url, e.g. https://leetcode.cn/problems/merge-two-sorted-lists/")
-        exit()
-    url = str(sys.argv[1])
+        url = input("Please input leetcode url, e.g. https://leetcode.cn/problems/merge-two-sorted-lists/")
+    else:
+        url = str(sys.argv[1])
     tokenfile = os.path.join(os.environ['HOME'], '.githubtoken')
     token = open(tokenfile, 'r')
     create_issue(url, token.read().strip())
