@@ -1,7 +1,9 @@
+import json
 import os
-import requests, json
 import re
 import sys
+
+import requests
 
 Remove = ["</?p>", "</?ul>", "</?ol>", "</li>", "</sup>"]
 Replace = [["&nbsp;", " "], ["&quot;", '"'], ["&lt;", "<"], ["&gt;", ">"],
@@ -11,6 +13,7 @@ Replace = [["&nbsp;", " "], ["&quot;", '"'], ["&lt;", "<"], ["&gt;", ">"],
            [" *<code> *", " `"], [" *</code> *", "` "], ["<pre>", "```\n"],
            ["</pre>", "\n```\n"], ["<em> *</em>", ""], [" *<em> *", " *"],
            [" *</em> *", "* "], ["</?div.*?>", ""], ["	*</?li>", "- "]]
+
 
 def convert(src):
     # pre内部预处理
@@ -37,13 +40,12 @@ def get_question_detail(slug: str) -> dict:
     session = requests.Session()
     url = "https://leetcode.cn/graphql"
     params = {
-        'operationName':
-        "getQuestionDetail",
+        'operationName': 'questionData',
         'variables': {
             'titleSlug': slug
         },
         'query':
-        '''query getQuestionDetail($titleSlug: String!) {
+            '''query questionData($titleSlug: String!) {
             question(titleSlug: $titleSlug) {
                 questionId
                 questionFrontendId
@@ -70,11 +72,15 @@ def get_question_detail(slug: str) -> dict:
         }'''
     }
     json_data = json.dumps(params).encode('utf8')
+    # plus 题库才需要登陆信息
+    leetcode_session = open(os.path.join(os.environ['HOME'], '.leetcode-session'), 'r').read().strip()
+
     headers = {
         'User-Agent': user_agent,
         'Connection': 'keep-alive',
         'Content-Type': 'application/json',
-        'Referer': 'https://leetcode.cn/problems/' + slug
+        'Referer': 'https://leetcode.cn/problems/' + slug,
+        'Cookie': leetcode_session,
     }
     resp = session.post(url, data=json_data, headers=headers, timeout=10)
     resp.encoding = 'utf8'
@@ -85,13 +91,13 @@ def get_question_detail(slug: str) -> dict:
     return question
 
 
-def get_problem_content(question:dict) -> str:
+def get_problem_content(question: dict) -> str:
     res = convert(question['translatedContent'])
     # 在正文后面填上标签
     res += "\n \n**标签**\n"
     tags = question['topicTags']
     for tag in tags:
-        if tag['translatedName'] != None:
+        if tag['translatedName'] is not None:
             tagName = tag['translatedName']
         else:
             tagName = tag['name']
@@ -116,6 +122,7 @@ def get_solution_by_lang(question: dict, lang: str) -> str:
         if x['lang'] == lang:
             return x['code']
 
+
 def gen_content(content, code, title, url):
     return """# {titlename}
 [{Url}]({Url})
@@ -129,6 +136,7 @@ def gen_content(content, code, title, url):
 ```
 >
 """.format(titlename=title, Url=url, Content=content, Code=code)
+
 
 def gen_issue(url: str):
     if url.startswith("https://leetcode.cn/problems/"):
@@ -150,10 +158,11 @@ def gen_issue(url: str):
         'title': title,
         'body': gen_content(content, code, title, url),
         'labels': ['leetcode'],
-        'assignees':['ljnpng']
+        'assignees': ['ljnpng']
     }
 
     return issue
+
 
 def create_issue(url, token):
     # 自定义body
@@ -172,8 +181,9 @@ def create_issue(url, token):
     # todo 输出issue 的url
     print(response.status_code)
 
+
 if __name__ == '__main__':
-    if(len(sys.argv) <= 1):
+    if len(sys.argv) <= 1:
         url = input("Please input leetcode url, e.g. https://leetcode.cn/problems/merge-two-sorted-lists/")
     else:
         url = str(sys.argv[1])
