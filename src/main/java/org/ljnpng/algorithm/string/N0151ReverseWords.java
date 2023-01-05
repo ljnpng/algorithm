@@ -36,23 +36,20 @@ public class N0151ReverseWords {
      * @return
      */
     public String reverseWords2(String s) {
-        s = s.trim();
         StringBuilder res = new StringBuilder();
-        StringBuilder word = new StringBuilder();
+        int start, end;
         for (int i = s.length() - 1; i >= 0; i--) {
             if (s.charAt(i) == ' ') {
-                if (word.length() == 0) {
-                    continue;
-                } else {
-                    res.append(word.reverse()).append(" ");
-                    word = new StringBuilder();
-                }
-            } else {
-                word.append(s.charAt(i));
+                continue;
             }
+            end = i + 1;
+            while (i >= 0 && s.charAt(i) != ' ') {
+                i--;
+            }
+            start = i + 1;
+            res.append(s, start, end).append(" ");
         }
-
-        return res.append(word.reverse()).toString();
+        return res.deleteCharAt(res.length() - 1).toString();
     }
 
     /**
