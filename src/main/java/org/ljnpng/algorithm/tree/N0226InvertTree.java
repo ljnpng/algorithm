@@ -22,4 +22,20 @@ public class N0226InvertTree {
         root.right = root.left;
         root.left = tmp;
     }
+
+    /**
+     * enhancement 分解子问题
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree2(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = invertTree2(root.left);
+        TreeNode right = invertTree2(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
 }
