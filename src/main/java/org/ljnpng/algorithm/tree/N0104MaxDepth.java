@@ -3,7 +3,7 @@ package org.ljnpng.algorithm.tree;
 
 import org.ljnpng.algorithm.domain.TreeNode;
 
-public class N104MaxDepth {
+public class N0104MaxDepth {
     public int maxDepth(TreeNode root) {
         if (root == null) {
             return 0;
