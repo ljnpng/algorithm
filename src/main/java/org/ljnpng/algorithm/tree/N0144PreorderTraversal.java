@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class N144PreorderTraversal {
+public class N0144PreorderTraversal {
     public List<Integer> preorderTraversal(TreeNode root) {
         if (root == null) {
             return Collections.emptyList();
