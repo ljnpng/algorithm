@@ -79,5 +79,35 @@ public class N0025ReverseKGroup {
         return dummy.next;
     }
 
+    /**
+     * 递归
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode reverseKGroup3(ListNode head, int k) {
+        ListNode cur = head;
+        int count = 0;
+        while (cur != null && count < k) {
+            // cur == null 最后一圈，小于k 正序
+            // count == k 刚好k个，翻转
+            cur = cur.next;
+            count++;
+        }
+
+        if (k == count) {
+            cur = reverseKGroup3(cur, k);
+            while (count > 0) {
+                ListNode next = head.next;
+                head.next = cur;
+                cur = head;
+                head = next;
+                count--;
+            }
+            head = cur;
+        }
+
+        return head;
+    }
 
 }
