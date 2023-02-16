@@ -18,9 +18,6 @@ public class N0654ConstructMaximumBinaryTree {
         if (left > right) {
             return null;
         }
-        if (left == right) {
-            return new TreeNode(nums[left]);
-        }
 
         int max = Integer.MIN_VALUE;
         int inx = left;
