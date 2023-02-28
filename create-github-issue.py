@@ -180,9 +180,13 @@ def create_issue(url, token):
     }
     repos = "https://api.github.com/repos/ljnpng/algorithm/issues"
     response = requests.post(url=repos, headers=headers, data=data)
-    # todo 输出issue 的url
-    print(response.status_code)
-
+    if response.status_code == 201:
+        issue_url = response.json()['html_url']
+        print(f"Issue created: {issue_url}")
+        return issue_url
+    else:
+        print("Failed to create issue")
+        sys.exit(1)
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
