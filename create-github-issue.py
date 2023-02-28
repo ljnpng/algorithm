@@ -188,11 +188,16 @@ def create_issue(url, token):
         print("Failed to create issue")
         sys.exit(1)
 
-if __name__ == '__main__':
+
+def main():
     if len(sys.argv) <= 1:
         url = input("Please input leetcode url, e.g. https://leetcode.cn/problems/merge-two-sorted-lists/")
     else:
         url = str(sys.argv[1])
-    tokenfile = os.path.join(os.environ['HOME'], '.githubtoken')
-    token = open(tokenfile, 'r')
+    token_file = os.path.join(os.environ['HOME'], '.githubtoken')
+    token = open(token_file, 'r')
     create_issue(url, token.read().strip())
+
+
+if __name__ == '__main__':
+    main()
