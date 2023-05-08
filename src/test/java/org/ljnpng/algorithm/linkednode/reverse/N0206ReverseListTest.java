@@ -3,7 +3,6 @@ package org.ljnpng.algorithm.linkednode.reverse;
 import org.junit.jupiter.api.Test;
 import org.ljnpng.algorithm.domain.ListNode;
 import org.ljnpng.algorithm.util.Utils;
-import sun.text.normalizer.UTF16;
 
 import static org.junit.jupiter.api.Assertions.*;
 
