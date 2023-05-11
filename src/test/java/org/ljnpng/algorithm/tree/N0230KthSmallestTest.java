@@ -2,6 +2,7 @@ package org.ljnpng.algorithm.tree;
 
 import org.junit.jupiter.api.Test;
 import org.ljnpng.algorithm.domain.TreeNode;
+import org.ljnpng.algorithm.tree.bst.N0230KthSmallest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
