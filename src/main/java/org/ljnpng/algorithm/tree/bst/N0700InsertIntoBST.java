@@ -2,7 +2,7 @@ package org.ljnpng.algorithm.tree.bst;
 
 import org.ljnpng.algorithm.domain.TreeNode;
 
-public class InsertIntoBST {
+public class N0700InsertIntoBST {
 
     public TreeNode insertIntoBST(TreeNode root, int val) {
         if (root == null) {
