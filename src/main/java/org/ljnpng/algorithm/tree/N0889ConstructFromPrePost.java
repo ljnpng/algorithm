@@ -5,7 +5,7 @@ import org.ljnpng.algorithm.domain.TreeNode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConstructFromPrePost {
+public class N0889ConstructFromPrePost {
 
     private Map<Integer, Integer> valToIndex;
 
