@@ -43,20 +43,28 @@ public class ThreeSum {
         if (lo >= hi) {
             return;
         }
+        int pivot = partition(nums, lo, hi);
+        internalSort(nums, lo, pivot - 1);
+        internalSort(nums, pivot + 1, hi);
+    }
 
-        int pivot = lo, inx = pivot + 1;
-        for (int i = pivot + 1; i <= hi; i++) {
-            if (nums[i] <= nums[pivot]) {
-                swap(nums, inx, i);
-                inx++;
+    private int partition(int[] nums, int lo, int hi) {
+        int pivot = nums[hi];
+        int i = lo - 1;
+        for (int j = lo; j < hi; j++) {
+            if (nums[j] < pivot) {
+                i++;
+                swap(nums, i, j);
             }
         }
-        swap(nums, pivot, inx - 1);
-        internalSort(nums, lo, inx - 2);
-        internalSort(nums, inx, hi);
+        swap(nums, i + 1, hi);
+        return i + 1;
     }
 
     private void swap(int[] nums, int i, int j) {
+        if (i == j ) {
+            return;
+        }
         int tmp = nums[i];
         nums[i] = nums[j];
         nums[j] = tmp;
