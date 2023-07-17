@@ -13,6 +13,11 @@ class N0018FourSumTest {
 
         N0018FourSum fourSum = new N0018FourSum();
         assertEquals(3, fourSum.fourSum(nums, target).size());
+
+        nums = new int[]{0, 0, 0, 1000000000, 1000000000, 1000000000, 1000000000};
+        target = 1000000000;
+
+        assertEquals(1, fourSum.fourSum(nums, target).size());
     }
 
 }
