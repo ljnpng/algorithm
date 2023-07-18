@@ -189,6 +189,17 @@ def create_issue(url, token):
         sys.exit(1)
 
 
+def preprocess_url(url):
+    pattern = r"https://leetcode\.cn/problems/([^/]+)/"
+    match = re.search(pattern, url)
+    if match:
+        processed_url = match.group(0)
+        return processed_url
+    else:
+        print("Wrong URL ! Please Check\n.It should be like https://leetcode-cn.com/problems/evaluate-division/")
+        sys.exit(1)
+
+
 def main():
     if len(sys.argv) <= 1:
         url = input("Please input leetcode url, e.g. https://leetcode.cn/problems/merge-two-sorted-lists/")
@@ -196,6 +207,7 @@ def main():
         url = str(sys.argv[1])
     token_file = os.path.join(os.environ['HOME'], '.githubtoken')
     token = open(token_file, 'r')
+    url = preprocess_url(url)
     create_issue(url, token.read().strip())
 
 
