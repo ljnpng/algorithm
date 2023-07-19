@@ -9,19 +9,15 @@ package org.ljnpng.algorithm.array;
 public class N0027RemoveElement {
 
     public int removeElement(int[] nums, int val) {
-        int i = 0, j = nums.length - 1;
+        int i = 0, j = nums.length;
         while (i < j) {
-            while (i < j && nums[i] != val) {
+            if (nums[i] == val) {
+                nums[i] = nums[--j];
+            } else {
                 i++;
             }
-            while (i < j && nums[j] == val) {
-                j--;
-            }
-            if (i < j) {
-                nums[i++] = nums[j--];
-            }
         }
-        return i == j && nums[i] == val ? j : j + 1;
+        return i;
     }
 
 }
