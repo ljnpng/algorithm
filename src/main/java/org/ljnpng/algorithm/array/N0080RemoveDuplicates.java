@@ -3,16 +3,12 @@ package org.ljnpng.algorithm.array;
 public class N0080RemoveDuplicates {
 
     public int removeDuplicates(int[] nums) {
-        int i = 0, j = 1;
-        int count = 0;
-        for (; j < nums.length; j++) {
-            if (nums[i] != nums[j]) {
-                nums[++i] = nums[j];
-                count = 0;
-            } else if(count < 1){
-                count++;
-                nums[++i] = nums[j];
-            }
+        int n = nums.length;
+        if (n <= 2) return n;
+        int i = 1, j = 2;
+        while(j < n) {
+            if (nums[i - 1] != nums[j]) nums[++i] = nums[j];
+            j++;
         }
         return i + 1;
     }
