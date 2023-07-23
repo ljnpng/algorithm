@@ -4,11 +4,18 @@ public class N0189Rotate {
     public void rotate(int[] nums, int k) {
         int n = nums.length;
         k = k % n;
-        int[] copy = new int[k];
-        System.arraycopy(nums, n - k, copy, 0, k);
-        for (int i = n - 1; i >= k; i--) {
-            nums[i] = nums[i - k];
+        reverse(nums, 0, n - 1);
+        reverse(nums, k, n - 1);
+        reverse(nums, 0, k - 1);
+    }
+
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int tmp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = tmp;
+            start++;
+            end--;
         }
-        System.arraycopy(copy, 0, nums, 0, k);
     }
 }
