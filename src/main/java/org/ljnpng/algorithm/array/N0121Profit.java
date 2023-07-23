@@ -9,9 +9,12 @@ public class N0121Profit {
         int n = prices.length;
         int min = Integer.MAX_VALUE;
         int profit = 0;
-        for (int i = 1; i < n; i++) {
-            min = Math.min(prices[i - 1], min);
-            profit = Math.max(profit, prices[i] - min);
+        for (int price : prices) {
+            if (price < min) {
+                min = price;
+            } else if (price - min > profit) {
+                profit = price - min;
+            }
         }
         return profit;
     }
