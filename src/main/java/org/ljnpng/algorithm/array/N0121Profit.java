@@ -7,12 +7,11 @@ public class N0121Profit {
         }
 
         int n = prices.length;
-        int[] buyIn = new int[n];
-        buyIn[0] = Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE;
         int profit = 0;
         for (int i = 1; i < n; i++) {
-            buyIn[i] = Math.min(prices[i - 1], buyIn[i - 1]);
-            profit = Math.max(profit, prices[i] - buyIn[i]);
+            min = Math.min(prices[i - 1], min);
+            profit = Math.max(profit, prices[i] - min);
         }
         return profit;
     }
