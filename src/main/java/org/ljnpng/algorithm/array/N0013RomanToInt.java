@@ -15,26 +15,14 @@ public class N0013RomanToInt {
         roman.put('D', 500);
         roman.put('M', 1000);
 
-        Map<String, Integer> sp = new HashMap<>();
-        sp.put("IV", 4);
-        sp.put("IX", 9);
-        sp.put("XL", 40);
-        sp.put("XC", 90);
-        sp.put("CD", 400);
-        sp.put("CM", 900);
-
-        char[] chars = s.toCharArray();
         int sum = 0;
-        for (int i = 0; i < chars.length; i++) {
-            if (i + 1 < chars.length) {
-                Integer num = sp.get("" + chars[i] + chars[i + 1]);
-                if (num != null) {
-                    sum += num;
-                    i++;
-                    continue;
-                }
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (i < n - 1 && roman.get(s.charAt(i)) < roman.get(s.charAt(i + 1))) {
+                sum -= roman.get(s.charAt(i));
+            } else {
+                sum += roman.get(s.charAt(i));
             }
-            sum += roman.get(chars[i]);
         }
         return sum;
     }
