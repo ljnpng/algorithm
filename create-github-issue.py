@@ -140,6 +140,23 @@ def gen_content(content, code, title, url):
 """.format(titlename=title, Url=url, Content=content, Code=code)
 
 
+def get_issues(repo, state='all'):
+    issues_url = f"https://api.github.com/repos/{repo}/issues"
+    headers = {'Accept': 'application/vnd.github.v3+json'}
+    params = {'state': state}
+    response = requests.get(issues_url, headers=headers, params=params)
+    response.raise_for_status()
+    return response.json()
+
+
+def check_for_existing_issue(repo, title):
+    issues = get_issues(repo)
+    for issue in issues:
+        if issue['title'] == title:
+            return issue['html_url']
+    return None
+
+
 def gen_issue(url: str):
     if url.startswith("https://leetcode.cn/problems/"):
         slug = url.replace("https://leetcode.cn/problems/", "",
@@ -166,9 +183,14 @@ def gen_issue(url: str):
     return issue
 
 
-def create_issue(url, token):
-    # 自定义body
+def create_issue(url, token, repo='ljnpng/algorithm'):
     data = gen_issue(url)
+    existing_issue_url = check_for_existing_issue(repo, data['title'])
+    if existing_issue_url:
+        print(f"An issue with the same title already exists: {existing_issue_url}")
+        return
+
+    # 自定义body
     data = json.dumps(data).encode('utf8')
 
     # 发起issue 请求
