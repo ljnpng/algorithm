@@ -19,12 +19,9 @@ public class N0014LongestCommonPrefix {
     private String getCommonPrefix(String str1, String str2) {
         int n = Math.min(str1.length(), str2.length());
         int i = 0;
-        for (; i < n; i++) {
-            if (str1.charAt(i) != str2.charAt(i)) {
-                i--;
-                break;
-            }
+        while (i < n && str1.charAt(i) == str2.charAt(i)) {
+            i++;
         }
-        return i < 0 ? "" : str1.substring(0, Math.min(i + 1, n));
+        return str1.substring(0, i);
     }
 }
