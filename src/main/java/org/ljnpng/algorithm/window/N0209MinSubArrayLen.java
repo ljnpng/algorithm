@@ -9,15 +9,10 @@ public class N0209MinSubArrayLen {
         int res = n + 1;
         while (right < n) {
             cur += nums[right];
-            if (cur >= target) {
+            while (cur >= target) {
                 res = Math.min(right - left + 1, res);
-                while (left <= right && cur >= target) {
-                    cur -= nums[left];
-                    left++;
-                    if (cur >= target) {
-                        res = Math.min(right - left + 1, res);
-                    }
-                }
+                cur -= nums[left];
+                left++;
             }
             right++;
         }
