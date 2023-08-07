@@ -14,6 +14,7 @@ public class N0030FindSubstring {
         List<Integer> res = new ArrayList<>();
         Set<String> set = Arrays.stream(words).collect(Collectors.toSet());
         for (int i = 0; i < n; i++) {
+            if (i + n * words.length > s.length()) break;
             int left = i, right = left;
             List<String> collect = Arrays.stream(words).collect(Collectors.toCollection(LinkedList::new));
             while (right <= s.length() - n) {
@@ -21,7 +22,7 @@ public class N0030FindSubstring {
                 boolean remove = collect.remove(sub1);
                 if (remove) {
                     right += n;
-                } else if (set.contains(sub1)) {
+                } else {
                     while (left <= right - n) {
                         String sub2 = s.substring(left, left + n);
                         left += n;
@@ -30,10 +31,10 @@ public class N0030FindSubstring {
                             break;
                         }
                     }
-                } else {
-                    collect = Arrays.stream(words).collect(Collectors.toCollection(LinkedList::new));
-                    right += n;
-                    left = right;
+                    if (!set.contains(sub1)) {
+                        left += n;
+                        right += n;
+                    }
                 }
                 if (right - left == n * words.length) {
                     res.add(left);
