@@ -12,22 +12,26 @@ public class N0076MinWindow {
         for (char c : chars) {
             target.put(c, target.getOrDefault(c, 0) + 1);
         }
-        String result = "";
         int matched = 0;
+        int start = 0, len = Integer.MAX_VALUE;
         while (right < m) {
             matched = pushOne(s, right, target, matched);
             right++;
             while (matched == n) {
-                result = tryResetString(result, s.substring(left, right));
-                if (result.length() == n) {
+                if (right - left < len) {
+                    start = left;
+                    len = right - left;
+                }
+                if (len == n) {
                     // Optional: 没有可能比n还小的了,直接退出
-                    return result;
+                    return s.substring(start, start + len);
                 }
                 matched = pullOne(s, left, target, matched);
                 left++;
             }
         }
-        return result;
+
+        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
     }
 
     private static int pushOne(String s, int index, Map<Character, Integer> target, int matched) {
@@ -52,9 +56,5 @@ public class N0076MinWindow {
             }
         }
         return matched;
-    }
-
-    private String tryResetString(String src, String target) {
-        return src.isEmpty() || src.length() >= target.length() ? target : src;
     }
 }

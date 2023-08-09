@@ -42,4 +42,14 @@ class N0076MinWindowTest {
         assertEquals(expected, actual);
     }
 
+
+    @Test
+    void test_5() {
+        String s = "cabwefgewcwaefgcf";
+        String t = "cae";
+        String expected = "cwae";
+        String actual = new N0076MinWindow().minWindow(s, t);
+        assertEquals(expected, actual);
+    }
+
 }
