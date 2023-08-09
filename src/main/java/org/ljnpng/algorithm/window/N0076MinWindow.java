@@ -13,25 +13,48 @@ public class N0076MinWindow {
             target.put(c, target.getOrDefault(c, 0) + 1);
         }
         String result = "";
-
+        int matched = 0;
         while (right < m) {
-            char c = s.charAt(right);
-            target.computeIfPresent(c, (ch, i) -> i - 1);
+            matched = pushOne(s, right, target, matched);
             right++;
-            while (right - left >= n && matched(target)) {
+            while (matched == n) {
                 result = tryResetString(result, s.substring(left, right));
-                target.computeIfPresent(s.charAt(left), (ch, i) -> i + 1);
+                if (result.length() == n) {
+                    // Optional: 没有可能比n还小的了,直接退出
+                    return result;
+                }
+                matched = pullOne(s, left, target, matched);
                 left++;
             }
         }
         return result;
     }
 
-    private boolean matched(Map<Character, Integer> target) {
-        return target.values().stream().allMatch(i -> i <= 0);
+    private static int pushOne(String s, int index, Map<Character, Integer> target, int matched) {
+        char c = s.charAt(index);
+        Integer i = target.get(c);
+        if (i != null) {
+            target.put(c, i - 1);
+            if (i >= 1) {
+                matched++;
+            }
+        }
+        return matched;
+    }
+
+    private static int pullOne(String s, int index, Map<Character, Integer> target, int matched) {
+        char c = s.charAt(index);
+        Integer i = target.get(c);
+        if (i != null) {
+            target.put(c, i + 1);
+            if (i >= 0) {
+                matched--;
+            }
+        }
+        return matched;
     }
 
     private String tryResetString(String src, String target) {
-        return src.length() == 0 || src.length() >= target.length() ? target : src;
+        return src.isEmpty() || src.length() >= target.length() ? target : src;
     }
 }
