@@ -11,9 +11,9 @@ import java.util.List;
 public class N0054SpiralOrder {
 
     public List<Integer> spiralOrder(int[][] matrix) {
-        int top = 0, bottom = matrix.length - 1,
-                left = 0, right = matrix[0].length - 1;
-        int num = (bottom + 1) * (right + 1);
+        int left = 0, right = matrix[0].length - 1;
+        int top = 0, bottom = matrix.length - 1;
+        int num = (right + 1) * (bottom + 1);
         List<Integer> res = new ArrayList<>();
         while (num > 0) {
             for (int i = left; i <= right && num > 0; i++) {
