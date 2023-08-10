@@ -140,17 +140,20 @@ def gen_content(content, code, title, url):
 """.format(titlename=title, Url=url, Content=content, Code=code)
 
 
-def get_issues(repo, state='all'):
+def get_issues(repo, token, state='all'):
     issues_url = f"https://api.github.com/repos/{repo}/issues"
-    headers = {'Accept': 'application/vnd.github.v3+json'}
+    headers = {
+        'Accept': 'application/vnd.github+json',
+        'Authorization': 'Bearer ' + token
+    }
     params = {'state': state}
     response = requests.get(issues_url, headers=headers, params=params)
     response.raise_for_status()
     return response.json()
 
 
-def check_for_existing_issue(repo, title):
-    issues = get_issues(repo)
+def check_for_existing_issue(repo, title, token):
+    issues = get_issues(repo, token)
     for issue in issues:
         if issue['title'] == title:
             return issue['html_url']
@@ -185,7 +188,7 @@ def gen_issue(url: str):
 
 def create_issue(url, token, repo='ljnpng/algorithm'):
     data = gen_issue(url)
-    existing_issue_url = check_for_existing_issue(repo, data['title'])
+    existing_issue_url = check_for_existing_issue(repo, data['title'], token)
     if existing_issue_url:
         print(f"An issue with the same title already exists: {existing_issue_url}")
         return
