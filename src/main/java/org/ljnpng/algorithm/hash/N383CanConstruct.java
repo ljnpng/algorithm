@@ -4,17 +4,14 @@ public class N383CanConstruct {
 
     public boolean canConstruct(String ransomNote, String magazine) {
         int[] count = new int[26];
-        for (char c : magazine.toCharArray()) {
-            count[c - 'a']++;
-        }
-
         for (int i = 0; i < ransomNote.length(); i++) {
             char c = ransomNote.charAt(i);
             int inx = c - 'a';
-            if (count[inx] < 1) {
+            int inx_magazine = magazine.indexOf(c, count[inx]);
+            if (inx_magazine < 0) {
                 return false;
             }
-            count[inx]--;
+            count[inx] = inx_magazine + 1;
         }
         return true;
     }
