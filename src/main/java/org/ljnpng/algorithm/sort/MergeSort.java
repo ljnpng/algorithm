@@ -15,19 +15,15 @@ public class MergeSort {
         sort(arr, start, mid);
         sort(arr, mid + 1, end);
         // 左右两边都排好序了, 用双指针
-        int[] temp = new int[end - start + 1];
-        int i = start, j = mid + 1, k = 0;
-        while (i <= mid && j <= end) {
-            temp[k++] = arr[i] < arr[j] ? arr[i++] : arr[j++];
+        int[] temp = new int[mid - start + 1]; // 优化: 只复制前半部分就行了, 因为安装双子针逐步后移, 会一直满足 k <= j, 也就是 后半部分始终能有空出位置给k
+        System.arraycopy(arr, start, temp, 0, temp.length);
+        int i = 0, j = mid + 1, k = start;
+        while (i < temp.length && j <= end) {
+            arr[k++] = temp[i] < arr[j] ? temp[i++] : arr[j++];
         }
         // 剩余的元素
-        while (i <= mid) {
-            temp[k++] = arr[i++];
+        while (i < temp.length) {
+            arr[k++] = temp[i++];
         }
-        while (j <= end) {
-            temp[k++] = arr[j++];
-        }
-        // 拷贝回原数组
-        System.arraycopy(temp, 0, arr, start, temp.length);
     }
 }
