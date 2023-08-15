@@ -230,7 +230,7 @@ def main():
         url = input("Please input leetcode url, e.g. https://leetcode.cn/problems/merge-two-sorted-lists/")
     else:
         url = str(sys.argv[1])
-    token_file = os.path.join(os.environ['HOME'], '.githubtoken')
+    token_file = '.githubtoken'
     token = open(token_file, 'r')
     url = preprocess_url(url)
     create_issue(url, token.read().strip())
