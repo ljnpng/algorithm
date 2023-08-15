@@ -11,11 +11,9 @@ public class N0205IsIsomorphic {
             char t_c = t.charAt(i);
             if (sChars[s_c] != tChars[t_c]) {
                 return false;
-            } else {
-                if (sChars[s_c] == 0) {
-                    sChars[s_c] = i + 1;
-                    tChars[t_c] = i + 1;
-                }
+            } else if (sChars[s_c] == 0) {
+                sChars[s_c] = i + 1;
+                tChars[t_c] = i + 1;
             }
         }
         return true;
