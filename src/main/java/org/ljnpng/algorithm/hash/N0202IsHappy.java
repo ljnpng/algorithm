@@ -1,5 +1,8 @@
 package org.ljnpng.algorithm.hash;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class N0202IsHappy {
 
     // 重点判断是不是会陷入循环, 如果陷入循环, 也即是说, 会出现重复的数字, 那么就不是快乐数
@@ -16,6 +19,16 @@ public class N0202IsHappy {
         } while (slow != fast);
         return slow == 1;
     }
+
+    public boolean isHappyWithHash(int n) {
+        Set<Integer> inter = new HashSet<>();
+        do {
+            inter.add(n);
+            n = squareSum(n);
+        } while (!inter.contains(n));
+        return n == 1;
+    }
+
 
     private int squareSum(int n) {
         int sum = 0;
