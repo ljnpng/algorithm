@@ -1,27 +1,30 @@
 package org.ljnpng.algorithm.hash;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class N0128LongestConsecutive {
 
     public int longestConsecutive(int[] nums) {
-        Arrays.sort(nums);
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+
         int max = 0;
-        int cur = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (i == 0) {
-                cur++;
-            } else {
-                if (nums[i] - nums[i - 1] == 1) {
+        for (Integer num : set) {
+            if (!set.contains(num - 1)) {
+                // 可以当作起点, 开始向上查找
+                int cur = 1;
+                int curNum = num;
+                while (set.contains(curNum + 1)) {
                     cur++;
-                } else if(nums[i] - nums[i - 1] == 0) {
-                    continue;
-                } else {
-                    max = Math.max(cur, max);
-                    cur = 1;
+                    curNum++;
                 }
+
+                max = Math.max(max, cur);
             }
         }
-        return Math.max(cur, max);
+        return max;
     }
 }
