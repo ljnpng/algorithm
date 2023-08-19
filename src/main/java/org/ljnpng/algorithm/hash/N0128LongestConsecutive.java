@@ -15,14 +15,12 @@ public class N0128LongestConsecutive {
         for (Integer num : set) {
             if (!set.contains(num - 1)) {
                 // 可以当作起点, 开始向上查找
-                int cur = 1;
                 int curNum = num;
                 while (set.contains(curNum + 1)) {
-                    cur++;
                     curNum++;
                 }
 
-                max = Math.max(max, cur);
+                max = Math.max(max, curNum - num + 1);
             }
         }
         return max;
