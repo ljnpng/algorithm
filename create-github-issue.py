@@ -1,4 +1,19 @@
-#!/usr/bin/python3
+#!/opt/homebrew/bin/python3
+
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title leetcode issue
+# @raycast.mode compact
+
+# Optional parameters:
+# @raycast.icon 🤖
+# @raycast.argument1 { "type": "text", "placeholder": "Placeholder" }
+# @raycast.packageName leetcode
+
+# Documentation:
+# @raycast.description create github issue which include a specific leetcode problem
+# @raycast.author ele.hope
+# @raycast.authorURL https://raycast.com/ele.hope
 
 import json
 import os
