@@ -15,8 +15,8 @@ public class N0452FindMinArrowShots {
             return 0;
         }
 
-        // 按第一个元素排序
-        Arrays.sort(points, Comparator.comparing(ints -> ints[0]));
+        // 按第二个元素排序
+        Arrays.sort(points, Comparator.comparingInt(a -> a[1]));
         int n = points.length;
 
         // 贪心算法
@@ -29,8 +29,6 @@ public class N0452FindMinArrowShots {
             if (points[i][0] > end) {
                 count++;
                 end = points[i][1];
-            } else {
-                end = Math.min(end, points[i][1]);
             }
         }
         return count;
