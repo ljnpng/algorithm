@@ -2,6 +2,7 @@ package org.ljnpng.algorithm.stack;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Map;
 
 public class N0020Isvalid {
 
@@ -10,29 +11,16 @@ public class N0020Isvalid {
 
         int n = s.length();
         Deque<Character> stack = new ArrayDeque<>();
-        char pop;
+        Map<Character, Character> pair = Map.of(')', '(', ']', '[', '}', '{');
         for (int i = 0; i < n; i++) {
             char c = s.charAt(i);
-            if (c == '(' || c == '{' || c == '[') {
+            if (!pair.containsKey(c)) {
                 stack.push(c);
                 continue;
             }
-
-            if (stack.isEmpty()) {
+            if (stack.isEmpty() || stack.pop() != pair.get(c)) {
                 return false;
             }
-            pop = stack.pop();
-            if (c == ')' && pop != '(') {
-                return false;
-            }
-
-            if (c == ']' && pop != '[') {
-                return false;
-            }
-            if (c == '}' && pop != '{') {
-                return false;
-            }
-
         }
         return stack.isEmpty();
     }
