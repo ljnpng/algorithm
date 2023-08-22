@@ -5,7 +5,7 @@ import java.util.Deque;
 
 public class N0155MinStack {
 
-    private Deque<StackValue> stack;
+    private final Deque<StackValue> stack;
 
     public N0155MinStack() {
         stack = new ArrayDeque<>();
