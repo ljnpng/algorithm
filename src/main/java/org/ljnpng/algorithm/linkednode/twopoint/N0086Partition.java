@@ -3,7 +3,7 @@ package org.ljnpng.algorithm.linkednode.twopoint;
 import org.ljnpng.algorithm.domain.ListNode;
 //[1,4,3,2,5,2]
 //3
-public class PartitionList {
+public class N0086Partition {
     public ListNode partition(ListNode head, int x) {
         ListNode list1 = new ListNode(-1);
         ListNode list2 = new ListNode(-1);

@@ -6,12 +6,12 @@ import org.ljnpng.algorithm.util.Utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PartitionListTest {
+class N0086PartitionListTest {
 
     @Test
     void partition() {
         ListNode listNode = Utils.stringToListNode("[1,4,3,2,5,2]");
-        ListNode partition = new PartitionList().partition(listNode, 3);
+        ListNode partition = new N0086Partition().partition(listNode, 3);
         assertEquals(Utils.listNodeToString(partition), "[1,2,2,4,3,5]");
     }
 }
