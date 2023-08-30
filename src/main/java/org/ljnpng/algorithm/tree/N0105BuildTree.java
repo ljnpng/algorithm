@@ -7,25 +7,28 @@ import java.util.Map;
 
 public class N0105BuildTree {
 
-    private int inx = -1;
-
-    Map<Integer, Integer> valToIndex;
+    private Map<Integer, Integer> valToIndex;
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if (preorder.length == 0) return null;
         valToIndex = new HashMap<>(inorder.length);
         for (int i = 0; i < inorder.length; i++) {
             valToIndex.put(inorder[i], i);
         }
-        return buildTree(preorder, inorder, 0, inorder.length - 1);
+
+        return buildTree(preorder, 0, inorder, 0, inorder.length - 1);
     }
 
-    public TreeNode buildTree(int[] preorder, int[] inorder, int low, int high) {
-        if (low > high) return null;
-        TreeNode root = new TreeNode(preorder[++inx]);
-        int cur = valToIndex.get(preorder[inx]);
-        root.left = buildTree(preorder, inorder, low, cur - 1);
-        root.right = buildTree(preorder, inorder, cur + 1, high);
+    private TreeNode buildTree(int[] preorder, int inx, int[] inorder, int low, int high) {
+        if (low > high) {
+            return null;
+        }
+        int val = preorder[inx];
+        TreeNode root = new TreeNode(val);
+        int cur = valToIndex.get(val);
+        int leftLength = cur - low;
+        root.left = buildTree(preorder, inx + 1, inorder, low, cur - 1);
+        root.right = buildTree(preorder, inx + leftLength + 1, inorder, cur + 1, high);
         return root;
     }
+
 }
