@@ -1,4 +1,4 @@
-package org.ljnpng.algorithm.tree;
+package org.ljnpng.algorithm.tree.bfs;
 
 import org.ljnpng.algorithm.domain.Node;
 
