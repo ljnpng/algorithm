@@ -4,23 +4,22 @@ import org.ljnpng.algorithm.domain.TreeNode;
 
 import java.util.*;
 
-public class N0637AverageOfLevels {
+public class N0102LevelOrder {
 
-    public List<Double> averageOfLevels(TreeNode root) {
+    public List<List<Integer>> levelOrder(TreeNode root) {
         if (root == null) {
             return Collections.emptyList();
         }
 
-        List<Double> result = new ArrayList<>();
-
+        List<List<Integer>> res = new LinkedList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
-            double sum = 0;
+            List<Integer> item = new LinkedList<>();
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
-                sum += node.val;
+                item.add(node.val);
 
                 if (node.left != null) {
                     queue.offer(node.left);
@@ -29,8 +28,9 @@ public class N0637AverageOfLevels {
                     queue.offer(node.right);
                 }
             }
-            result.add(sum / size);
+            res.add(item);
+
         }
-        return result;
+        return res;
     }
 }
