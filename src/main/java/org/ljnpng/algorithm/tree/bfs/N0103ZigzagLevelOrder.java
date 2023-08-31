@@ -7,38 +7,33 @@ import java.util.*;
 public class N0103ZigzagLevelOrder {
 
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        if(root == null) return Collections.emptyList();
+        if (root == null) return Collections.emptyList();
 
-        Deque<TreeNode> leftToRight = new LinkedList<>();
-        Deque<TreeNode> rightToLeft = new LinkedList<>();
-        rightToLeft.push(root);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        boolean leftToRight = false;
         List<List<Integer>> res = new ArrayList<>();
-        while (!leftToRight.isEmpty() || !rightToLeft.isEmpty()) {
-            List<Integer> item = new ArrayList<>();
-            if (!leftToRight.isEmpty()) {
-                while (!leftToRight.isEmpty()) {
-                    TreeNode node = leftToRight.pop();
-                    item.add(node.val);
-                    if (node.right != null) {
-                        rightToLeft.push(node.right);
-                    }
-                    if (node.left != null) {
-                        rightToLeft.push(node.left);
-                    }
+        while (!queue.isEmpty()) {
+            Deque<Integer> item = new LinkedList<>();
+            int size = queue.size();
+            leftToRight = !leftToRight;
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (leftToRight) {
+                    item.offerLast(node.val);
+                } else {
+                    item.offerFirst(node.val);
                 }
-            } else {
-                while (!rightToLeft.isEmpty()) {
-                    TreeNode node = rightToLeft.pop();
-                    item.add(node.val);
-                    if (node.left != null) {
-                        leftToRight.push(node.left);
-                    }
-                    if (node.right != null) {
-                        leftToRight.push(node.right);
-                    }
+
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
                 }
             }
-            res.add(item);
+
+            res.add(new LinkedList<>(item));
         }
         return res;
     }
