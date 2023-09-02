@@ -3,7 +3,7 @@ package org.ljnpng.algorithm.graphy;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class NumIslands {
+public class N0200NumIslands {
 
     /**
      * dfs
