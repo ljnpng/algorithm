@@ -1,4 +1,4 @@
-package org.ljnpng.algorithm.graphy;
+package org.ljnpng.algorithm.graphy.topo;
 
 import java.util.ArrayList;
 import java.util.List;
