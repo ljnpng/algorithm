@@ -45,6 +45,7 @@ public class N0547FindCircleNum {
             // 如果不相等就一直往上找根节点
             return parent[i];
         }
+        parent[i] = find(parent[i]); // 压缩路径
         return find(parent[i]);
     }
 
