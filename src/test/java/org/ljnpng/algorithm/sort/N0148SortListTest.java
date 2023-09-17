@@ -15,4 +15,11 @@ class N0148SortListTest {
         Assertions.assertEquals(Utils.stringToListNode("[1,2,3,4]"), head);
     }
 
+    @Test
+    void test_2() {
+        ListNode head = Utils.stringToListNode("[4,2,1,3]");
+        head = new N0148SortList().sortList2(head);
+        Assertions.assertEquals(Utils.stringToListNode("[1,2,3,4]"), head);
+    }
+
 }
