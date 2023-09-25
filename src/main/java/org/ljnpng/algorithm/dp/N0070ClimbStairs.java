@@ -4,12 +4,14 @@ public class N0070ClimbStairs {
 
     public int climbStairs(int n) {
         if (n == 1) return 1;
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
+        if (n == 2) return 2;
+        int pre2 = 1, pre1 = 2;
+        int ans = pre1 + pre2;
         for (int i = 3; i <= n; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];
+            ans = pre1 + pre2;
+            pre2 = pre1;
+            pre1 = ans;
         }
-        return dp[n - 1];
+        return ans;
     }
 }
