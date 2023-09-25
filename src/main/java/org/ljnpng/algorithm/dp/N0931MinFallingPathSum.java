@@ -2,7 +2,7 @@ package org.ljnpng.algorithm.dp;
 
 import java.util.Arrays;
 
-public class MinFallingPathSum {
+public class N0931MinFallingPathSum {
     public int minFallingPathSum(int[][] matrix) {
         int n = matrix.length;
         int[][] dp = new int[n][n];
