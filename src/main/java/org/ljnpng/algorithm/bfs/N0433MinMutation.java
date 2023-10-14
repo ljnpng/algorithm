@@ -2,7 +2,7 @@ package org.ljnpng.algorithm.bfs;
 
 import java.util.*;
 
-public class MinMutation {
+public class N0433MinMutation {
     public int minMutation(String startGene, String endGene, String[] bank) {
         Set<String> genes = new HashSet<>(bank.length);
         genes.addAll(Arrays.asList(bank));
