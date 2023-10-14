@@ -10,6 +10,9 @@ public class MinMutation {
             return -1;
         }
 
+        // 优化点
+        // 可以使用领个visited数组 记录已经访问过的节点
+
         Queue<String> queue = new java.util.LinkedList<>();
         queue.offer(startGene);
         int step = 0;
